@@ -62,10 +62,10 @@ __metadata:
   dependencies:
     "@typescript-eslint/eslint-plugin": latest
     "@typescript-eslint/parser": latest
-    eslint: ^8.33.0
+    eslint: 8.33.0
     eslint-plugin-react: latest
-    prettier: ^2.8.3
-    typescript: ^4.9.5
+    prettier: 2.8.3
+    typescript: 4.9.5
   languageName: unknown
   linkType: soft
 
@@ -85,16 +85,16 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@marulloc/untitled@workspace:apps/untitled"
   dependencies:
-    "@next/font": ^13.1.6
-    "@types/eslint": ^8
-    "@types/node": ^18.11.19
-    "@types/react": ^18.0.27
-    "@types/react-dom": ^18
-    eslint: ^8.33.0
-    eslint-config-next: ^13.1.6
-    next: ^13.1.6
-    react: ^18.2.0
-    react-dom: ^18.2.0
+    "@next/font": 13.1.6
+    "@types/eslint": 8
+    "@types/node": 18.11.19
+    "@types/react": 18.0.27
+    "@types/react-dom": 18
+    eslint: 8.33.0
+    eslint-config-next: 13.1.6
+    next: 13.1.6
+    react: 18.2.0
+    react-dom: 18.2.0
     typescript: 4.9.5
   languageName: unknown
   linkType: soft
@@ -115,7 +115,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@next/font@npm:^13.1.6":
+"@next/font@npm:13.1.6":
   version: 13.1.6
   resolution: "@next/font@npm:13.1.6"
   checksum: 06499c9361d8ecf1bca47f20dfb226b6e9f77668afe967809cd8a4eade1b8620f9d723032098b2a0a9df2d2e2df96ad17e8128fcb7f494c99951ee8a61027966
@@ -270,7 +270,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/eslint@npm:^8":
+"@types/eslint@npm:8":
   version: 8.21.0
   resolution: "@types/eslint@npm:8.21.0"
   dependencies:
@@ -301,7 +301,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/node@npm:^18.11.19":
+"@types/node@npm:18.11.19":
   version: 18.11.19
   resolution: "@types/node@npm:18.11.19"
   checksum: d7cd19fcfc59cbdd3f9ba0b4072cb7adc21bd575bd8eb7d7e698975e63564aaa83f03434f32b12331f84f73d0b369d9cbe2371e359d9d7f5c3361f4987f4f7da
@@ -315,7 +315,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/react-dom@npm:^18":
+"@types/react-dom@npm:18, @types/react-dom@npm:^18":
   version: 18.0.10
   resolution: "@types/react-dom@npm:18.0.10"
   dependencies:
@@ -324,7 +324,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/react@npm:*, @types/react@npm:^18.0.27":
+"@types/react@npm:*, @types/react@npm:18.0.27, @types/react@npm:^18.0.27":
   version: 18.0.27
   resolution: "@types/react@npm:18.0.27"
   dependencies:
@@ -944,7 +944,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"eslint-config-next@npm:^13.1.6":
+"eslint-config-next@npm:13.1.6":
   version: 13.1.6
   resolution: "eslint-config-next@npm:13.1.6"
   dependencies:
@@ -1138,7 +1138,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"eslint@npm:^8.33.0":
+"eslint@npm:8.33.0":
   version: 8.33.0
   resolution: "eslint@npm:8.33.0"
   dependencies:
@@ -2055,7 +2055,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"next@npm:^13.1.6":
+"next@npm:13.1.6":
   version: 13.1.6
   resolution: "next@npm:13.1.6"
   dependencies:
@@ -2337,7 +2337,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"prettier@npm:^2.8.3":
+"prettier@npm:2.8.3":
   version: 2.8.3
   resolution: "prettier@npm:2.8.3"
   bin:
@@ -2371,7 +2371,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"react-dom@npm:^18.2.0":
+"react-dom@npm:18.2.0, react-dom@npm:^18.2.0":
   version: 18.2.0
   resolution: "react-dom@npm:18.2.0"
   dependencies:
@@ -2390,7 +2390,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"react@npm:^18.2.0":
+"react@npm:18.2.0, react@npm:^18.2.0":
   version: 18.2.0
   resolution: "react@npm:18.2.0"
   dependencies:
