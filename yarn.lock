@@ -63,6 +63,7 @@ __metadata:
     "@typescript-eslint/eslint-plugin": latest
     "@typescript-eslint/parser": latest
     eslint: 8.33.0
+    eslint-config-next: 13.1.6
     eslint-plugin-react: latest
     prettier: 2.8.3
     typescript: 4.9.5
@@ -118,7 +119,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@next/font@npm:13.1.6":
+"@next/font@npm:13.1.6, @next/font@npm:^13":
   version: 13.1.6
   resolution: "@next/font@npm:13.1.6"
   checksum: 06499c9361d8ecf1bca47f20dfb226b6e9f77668afe967809cd8a4eade1b8620f9d723032098b2a0a9df2d2e2df96ad17e8128fcb7f494c99951ee8a61027966
@@ -2058,7 +2059,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"next@npm:13.1.6":
+"next@npm:13.1.6, next@npm:^13":
   version: 13.1.6
   resolution: "next@npm:13.1.6"
   dependencies:
