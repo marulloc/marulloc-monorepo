@@ -66,6 +66,9 @@ __metadata:
     eslint-plugin-react: latest
     prettier: 2.8.3
     typescript: 4.9.5
+  dependenciesMeta:
+    next@13.1.6:
+      unplugged: true
   languageName: unknown
   linkType: soft
 
@@ -73,11 +76,11 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@marulloc/marulloc-ui@workspace:packages/marulloc-ui"
   dependencies:
-    "@types/react": ^18.0.27
-    "@types/react-dom": ^18
-    react: ^18.2.0
-    react-dom: ^18.2.0
-    typescript: ^4.9.5
+    "@types/react": 18.0.27
+    "@types/react-dom": 18
+    react: 18.2.0
+    react-dom: 18.2.0
+    typescript: 4.9.5
   languageName: unknown
   linkType: soft
 
@@ -315,7 +318,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/react-dom@npm:18, @types/react-dom@npm:^18":
+"@types/react-dom@npm:18":
   version: 18.0.10
   resolution: "@types/react-dom@npm:18.0.10"
   dependencies:
@@ -324,7 +327,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/react@npm:*, @types/react@npm:18.0.27, @types/react@npm:^18.0.27":
+"@types/react@npm:*, @types/react@npm:18.0.27":
   version: 18.0.27
   resolution: "@types/react@npm:18.0.27"
   dependencies:
@@ -2371,7 +2374,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"react-dom@npm:18.2.0, react-dom@npm:^18.2.0":
+"react-dom@npm:18.2.0":
   version: 18.2.0
   resolution: "react-dom@npm:18.2.0"
   dependencies:
@@ -2390,7 +2393,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"react@npm:18.2.0, react@npm:^18.2.0":
+"react@npm:18.2.0":
   version: 18.2.0
   resolution: "react@npm:18.2.0"
   dependencies:
@@ -2807,7 +2810,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"typescript@npm:4.9.5, typescript@npm:^4.9.5":
+"typescript@npm:4.9.5":
   version: 4.9.5
   resolution: "typescript@npm:4.9.5"
   bin:
@@ -2817,7 +2820,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"typescript@patch:typescript@4.9.5#~builtin<compat/typescript>, typescript@patch:typescript@^4.9.5#~builtin<compat/typescript>":
+"typescript@patch:typescript@4.9.5#~builtin<compat/typescript>":
   version: 4.9.5
   resolution: "typescript@patch:typescript@npm%3A4.9.5#~builtin<compat/typescript>::version=4.9.5&hash=23ec76"
   bin:

@@ -20,5 +20,10 @@
         ".": {
             "import": "./dist/index.js"
         }
+    },
+    "dependenciesMeta": {
+        "next@13.1.6": {
+            "unplugged": true
+        }
     }
 }
