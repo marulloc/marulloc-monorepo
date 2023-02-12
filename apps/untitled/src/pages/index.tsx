@@ -16,6 +16,9 @@ export default function Home() {
             </Head>
             <div>asdasdas</div>
             <main className={styles.main}>
+                <a href="https://reactjs.org" target="_blank">
+                    <img src={reactLogo} className="logo react" alt="React logo" />
+                </a>
                 <div className={styles.description}>
                     <p>
                         Get started by editing&nbsp;
