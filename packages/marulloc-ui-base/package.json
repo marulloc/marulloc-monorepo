@@ -1,0 +1,38 @@
+{
+    "name": "@marulloc/marulloc-ui-base",
+    "packageManager": "yarn@3.4.1",
+    "private": true,
+    "version": "0.0.0",
+    "type": "module",
+    "scripts": {
+        "dev": "vite",
+        "build": "tsc && vite build",
+        "preview": "vite preview"
+    },
+    "dependencies": {
+        "react": "^18.2.0",
+        "react-dom": "^18.2.0"
+    },
+    "devDependencies": {
+        "@babel/core": "^7.20.12",
+        "@types/babel__core": "^7",
+        "@types/node": "^18.13.0",
+        "@types/react": "^18.0.27",
+        "@types/react-dom": "^18.0.10",
+        "@vitejs/plugin-react": "^3.1.0",
+        "typescript": "^4.9.3",
+        "vite": "^4.1.0"
+    },
+    "files": [
+        "dist"
+    ],
+    "main": "./dist/my-lib.umd.js",
+    "module": "./dist/my-lib.es.js",
+    "types": "./dist/index.d.ts",
+    "exports": {
+        ".": {
+            "import": "./dist/my-lib.es.js",
+            "require": "./dist/my-lib.umd.js"
+        }
+    }
+}
