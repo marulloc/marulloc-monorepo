@@ -1,10 +1,4 @@
-import React from 'react';
-
-type TProps = {
-    propA: string;
-};
-
-const TestDiv: React.FC<TProps> = ({ propA }) => {
+const TestDiv = ({ propA }: { propA: string }) => {
     return <div>{propA}</div>;
 };
 

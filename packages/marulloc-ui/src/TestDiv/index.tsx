@@ -1,11 +1,9 @@
-
-
 type TProps = {
-    propA : string
-}
+    propA: string;
+};
 
-const TestDiv : React.FC<TProps> = ({propA}) => {
-    return <div>{propA}</div>
-}
+const TestDiv: React.FC<TProps> = ({ propA }) => {
+    return <div>{propA}</div>;
+};
 
-export default TestDiv
+export default TestDiv;

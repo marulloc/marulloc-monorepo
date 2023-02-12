@@ -2,7 +2,7 @@ import Head from 'next/head';
 import Image from 'next/image';
 import { Inter } from '@next/font/google';
 import styles from '@/styles/Home.module.css';
-
+import { TestDiv } from '@marulloc/marulloc-ui-base';
 const inter = Inter({ subsets: ['latin'] });
 
 export default function Home() {
@@ -14,11 +14,9 @@ export default function Home() {
                 <meta name="viewport" content="width=device-width, initial-scale=1" />
                 <link rel="icon" href="/favicon.ico" />
             </Head>
+            <TestDiv propA="123123 12">asdas2d</TestDiv>
             <div>asdasdas</div>
             <main className={styles.main}>
-                <a href="https://reactjs.org" target="_blank">
-                    <img src={reactLogo} className="logo react" alt="React logo" />
-                </a>
                 <div className={styles.description}>
                     <p>
                         Get started by editing&nbsp;
