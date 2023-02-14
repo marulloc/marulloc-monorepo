@@ -15,10 +15,11 @@
         "isolatedModules": true,
         "jsx": "react-jsx",
         //
+        "baseUrl": ".",
         "noEmit": false,
         "declaration": true,
-        "outDir": "./dist"
+        "outDir": "dist"
     },
     //
-    "include": ["src/lib/**/*", "**/*.ts", "**/*.tsx"]
+    "include": ["src/lib/**/*"]
 }
