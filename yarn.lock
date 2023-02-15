@@ -2511,6 +2511,21 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@marulloc/marulloc-components@workspace:packages/marulloc-components":
+  version: 0.0.0-use.local
+  resolution: "@marulloc/marulloc-components@workspace:packages/marulloc-components"
+  dependencies:
+    "@types/node": ^18.13.0
+    "@types/react": ^18.0.27
+    "@types/react-dom": ^18.0.10
+    "@vitejs/plugin-react": ^3.1.0
+    react: ^18.2.0
+    react-dom: ^18.2.0
+    typescript: ^4.9.3
+    vite: ^4.1.0
+  languageName: unknown
+  linkType: soft
+
 "@marulloc/marulloc-monorepo@workspace:.":
   version: 0.0.0-use.local
   resolution: "@marulloc/marulloc-monorepo@workspace:."
@@ -3398,6 +3413,13 @@ __metadata:
   version: 18.11.19
   resolution: "@types/node@npm:18.11.19"
   checksum: d7cd19fcfc59cbdd3f9ba0b4072cb7adc21bd575bd8eb7d7e698975e63564aaa83f03434f32b12331f84f73d0b369d9cbe2371e359d9d7f5c3361f4987f4f7da
+  languageName: node
+  linkType: hard
+
+"@types/node@npm:^18.13.0":
+  version: 18.13.0
+  resolution: "@types/node@npm:18.13.0"
+  checksum: 4ea10f8802848b01672bce938f678b6774ca2cee0c9774f12275ab064ae07818419c3e2e41d6257ce7ba846d1ea26c63214aa1dfa4166fa3746291752b8c6416
   languageName: node
   linkType: hard
 
@@ -9312,20 +9334,6 @@ __metadata:
   checksum: b38a025a12c8146d6eeea5a7f2bf27d51d8ad6064da8ca9405fcf7bf9b54acd43e3b30ddd7abb9b1bfa4ddb266019133313482570ddb207de568f71ecfcf6060
   languageName: node
   linkType: hard
-
-"marulloc-components@workspace:packages/marulloc-components":
-  version: 0.0.0-use.local
-  resolution: "marulloc-components@workspace:packages/marulloc-components"
-  dependencies:
-    "@types/react": ^18.0.27
-    "@types/react-dom": ^18.0.10
-    "@vitejs/plugin-react": ^3.1.0
-    react: ^18.2.0
-    react-dom: ^18.2.0
-    typescript: ^4.9.3
-    vite: ^4.1.0
-  languageName: unknown
-  linkType: soft
 
 "mdn-data@npm:2.0.14":
   version: 2.0.14
