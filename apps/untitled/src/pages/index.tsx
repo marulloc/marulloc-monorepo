@@ -2,7 +2,8 @@ import Head from 'next/head';
 import Image from 'next/image';
 import { Inter } from '@next/font/google';
 import styles from '@/styles/Home.module.css';
-import { TestDiv } from '@marulloc/marulloc-ui-base';
+import { MyDiv } from '@marulloc/marulloc-ui';
+
 const inter = Inter({ subsets: ['latin'] });
 
 export default function Home() {
@@ -14,7 +15,8 @@ export default function Home() {
                 <meta name="viewport" content="width=device-width, initial-scale=1" />
                 <link rel="icon" href="/favicon.ico" />
             </Head>
-            <TestDiv propA="123123 12">asdas2d</TestDiv>
+
+            <MyDiv propA="1" propB={33} />
             <div>asdasdas</div>
             <main className={styles.main}>
                 <div className={styles.description}>

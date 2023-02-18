@@ -1,4 +1,4 @@
-import TestDiv, { TTestDivProps } from './TestDiv';
+import MyDiv, { TMyDivProps } from './MyDiv';
 
-export { TestDiv };
-export { type TTestDivProps };
+export type { TMyDivProps };
+export { MyDiv };
