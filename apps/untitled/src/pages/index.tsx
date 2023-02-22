@@ -3,6 +3,7 @@ import Image from 'next/image';
 import { Inter } from '@next/font/google';
 import styles from '@/styles/Home.module.css';
 import { MyDiv } from '@marulloc/marulloc-ui';
+import TextEditor from '@/components/TextEditor';
 
 const inter = Inter({ subsets: ['latin'] });
 
@@ -15,9 +16,12 @@ export default function Home() {
                 <meta name="viewport" content="width=device-width, initial-scale=1" />
                 <link rel="icon" href="/favicon.ico" />
             </Head>
-
             <MyDiv propA="1" propB={33} />
-            <div>asdasdas</div>
+            -------
+            <div style={{ padding: 10 }}>
+                <TextEditor />
+            </div>
+            ------
             <main className={styles.main}>
                 <div className={styles.description}>
                     <p>
