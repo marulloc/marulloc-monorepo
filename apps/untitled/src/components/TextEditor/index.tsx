@@ -1,21 +1,44 @@
-import React, { useState } from 'react';
+import '@toast-ui/editor/dist/toastui-editor.css';
+import 'tui-color-picker/dist/tui-color-picker.css';
+import '@toast-ui/editor-plugin-color-syntax/dist/toastui-editor-plugin-color-syntax.css';
+import colorSyntax from '@toast-ui/editor-plugin-color-syntax';
+import { Editor } from '@toast-ui/react-editor';
 
-const TextEditor: React.FC = () => {
-    const [text, setText] = useState('');
+interface Props {
+    content: string;
+    editorRef: React.MutableRefObject<any>;
+}
 
-    const handleChange = (event) => {
-        setText(event.target.value);
-    };
+const TextEditor = ({ content = '', editorRef }: Props) => {
+    const toolbarItems = [
+        ['heading', 'bold', 'italic', 'strike'],
+        ['hr'],
+        ['ul', 'ol', 'task'],
+        ['table', 'link'],
+        ['image'],
+        ['code'],
+        ['scrollSync'],
+    ];
 
-    const handleSave = () => {
-        console.log('Text Saved', text);
-    };
     return (
-        <div>
-            <textarea value={text} onChange={handleChange} />
-            <button onClick={handleSave}>Save</button>
+        <div style={{ height: 500 }}>
+            {editorRef && (
+                <Editor
+                    ref={editorRef}
+                    initialValue={content || ' '} // 글 수정 시 사용
+                    initialEditType="wysiwyg" // wysiwyg & markdown
+                    previewStyle={window.innerWidth > 1000 ? 'vertical' : 'tab'} // tab, vertical
+                    hideModeSwitch={true}
+                    height="calc(100% - 10rem)"
+                    theme={''} // '' & 'dark'
+                    usageStatistics={false}
+                    toolbarItems={toolbarItems}
+                    useCommandShortcut={true}
+                    plugins={[colorSyntax]}
+                />
+            )}
         </div>
     );
 };
 
-export default React.memo(TextEditor);
+export default TextEditor;

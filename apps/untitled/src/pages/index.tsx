@@ -3,11 +3,17 @@ import Image from 'next/image';
 import { Inter } from '@next/font/google';
 import styles from '@/styles/Home.module.css';
 import { MyDiv } from '@marulloc/marulloc-ui';
-import TextEditor from '@/components/TextEditor';
+// import TextEditor from '@/components/TextEditor';
+import dynamic from 'next/dynamic';
+import { useRef } from 'react';
+
+const TextEditor = dynamic(() => import('@/components/TextEditor'), { ssr: false });
 
 const inter = Inter({ subsets: ['latin'] });
 
 export default function Home() {
+    const ref = useRef<any>(null);
+
     return (
         <>
             <Head>
@@ -19,7 +25,7 @@ export default function Home() {
             <MyDiv propA="1" propB={33} />
             -------
             <div style={{ padding: 10 }}>
-                <TextEditor />
+                <TextEditor content="" editorRef={ref} />
             </div>
             ------
             <main className={styles.main}>
