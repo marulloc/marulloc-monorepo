@@ -2057,6 +2057,25 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@marulloc/bi-watcher@workspace:apps/bi-watcher":
+  version: 0.0.0-use.local
+  resolution: "@marulloc/bi-watcher@workspace:apps/bi-watcher"
+  dependencies:
+    "@marulloc/marulloc-ui": "workspace:^"
+    "@next/font": 13.1.6
+    "@types/eslint": 8
+    "@types/node": 18.11.19
+    "@types/react": 18.0.27
+    "@types/react-dom": 18
+    eslint: 8.33.0
+    eslint-config-next: 13.1.6
+    next: 13.1.6
+    react: 18.2.0
+    react-dom: 18.2.0
+    typescript: 4.9.5
+  languageName: unknown
+  linkType: soft
+
 "@marulloc/marulloc-monorepo@workspace:.":
   version: 0.0.0-use.local
   resolution: "@marulloc/marulloc-monorepo@workspace:."
