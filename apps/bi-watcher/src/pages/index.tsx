@@ -3,7 +3,6 @@ import Image from 'next/image';
 import { Inter } from '@next/font/google';
 import styles from '@/styles/Home.module.css';
 import { MyDiv } from '@marulloc/marulloc-ui';
-import { useRef } from 'react';
 import ContSocketUpbit from '@/containers/ContSocketUpbit';
 const inter = Inter({ subsets: ['latin'] });
 
