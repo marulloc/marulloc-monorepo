@@ -2,11 +2,17 @@ import Head from 'next/head';
 import Image from 'next/image';
 import { Inter } from '@next/font/google';
 import styles from '@/styles/Home.module.css';
-import { MyDiv } from '@marulloc/marulloc-ui';
+// import { MyDiv } from '@marulloc/marulloc-ui';
 import ContSocketUpbit from '@/containers/ContSocketUpbit';
+import { useState } from 'react';
 const inter = Inter({ subsets: ['latin'] });
 
 export default function Home() {
+    const [testStream, setTestStream] = useState<Array<'orderbook' | 'ticker' | 'trade'>>([
+        'orderbook',
+    ]);
+    const [testCrypto, setTestCrypto] = useState(['KRW-BTC']);
+
     return (
         <>
             <Head>
@@ -16,7 +22,27 @@ export default function Home() {
                 <link rel="icon" href="/favicon.ico" />
             </Head>
             {/* <MyDiv propA="1" propB={33} /> */}
-            <ContSocketUpbit />
+            <div style={{ padding: 20, border: '1px solid red' }}>
+                <ContSocketUpbit crypto={testCrypto} stream={testStream} />
+                <button
+                    style={{ height: 30, width: 100, margin: 5 }}
+                    onClick={() => setTestStream((prev) => [...prev, 'ticker'])}
+                >
+                    PUSH ticker
+                </button>
+                <button
+                    style={{ height: 30, width: 100, margin: 5 }}
+                    onClick={() => setTestStream((prev) => [...prev, 'orderbook'])}
+                >
+                    PUSH orderbook
+                </button>
+                <button
+                    style={{ height: 30, width: 100, margin: 5 }}
+                    onClick={() => setTestStream((prev) => [...prev, 'trade'])}
+                >
+                    PUSH Trade
+                </button>
+            </div>
             <main className={styles.main}>
                 <div className={styles.description}>
                     <p>

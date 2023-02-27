@@ -1,21 +1,25 @@
-import { useEffect, useRef } from 'react';
+import { useEffect, useMemo, useRef, useState } from 'react';
 
 const END_POINT = 'wss://api.upbit.com/websocket/v1';
 
-const ContSocketUpbit: React.FC = () => {
-    const socket = useRef<WebSocket | null>(null);
+type TProps = {
+    crypto: Array<string>; // TODO : Typing
+    stream: Array<'ticker' | 'orderbook' | 'trade'>;
+    //children
+};
 
+const ContSocketUpbit: React.FC<TProps> = ({ crypto, stream }) => {
+    const socket = useRef<WebSocket | null>(null);
+    const [isConnected, setIsConnected] = useState<boolean>(false);
+
+    /** 2023.02.27 조병건
+     *  Initialize  */
     useEffect(() => {
         if (!socket.current) {
             socket.current = new WebSocket(END_POINT);
             socket.current.onopen = () => {
                 console.log('!!! Connected !!!' + END_POINT);
-
-                const subscriptionMessage = JSON.stringify([
-                    { ticket: 'UNIQUE_TICKET' }, //ticket으로 그분해야되네
-                    { type: 'orderbook', codes: ['KRW-BTC'] },
-                ]);
-                socket.current?.send(subscriptionMessage);
+                setIsConnected(true);
             };
             // socket.current.onerror = (_error) => {};
 
@@ -32,12 +36,35 @@ const ContSocketUpbit: React.FC = () => {
                     // TODO : processing
                 }
             };
+            socket.current.onclose = () => {
+                // TODO : connect Again when Closed
+            };
         }
 
         return () => {
             if (socket.current) socket.current?.close();
         };
     }, []);
+
+    const streamConfig = useMemo(() => {
+        const sc: Array<
+            { ticket: string } | { type: TProps['stream'][number]; codes: TProps['crypto'] }
+        > = [{ ticket: 'bi-watcher-upbit' }];
+
+        if (stream.includes('ticker')) sc.push({ type: 'ticker', codes: [...crypto] });
+        if (stream.includes('orderbook')) sc.push({ type: 'orderbook', codes: [...crypto] });
+        if (stream.includes('trade')) sc.push({ type: 'trade', codes: [...crypto] });
+        return sc;
+        // { ticket: 'UNIQUE_TICKET' },
+        // { type: 'ticker', codes: ['KRW-BTC'] },
+        // { type: 'orderbook', codes: ['KRW-BTC'] },
+        // { type: 'trade', codes: ['KRW-BTC'] },
+    }, [crypto, stream]);
+
+    useEffect(() => {
+        if (!socket.current || !isConnected) return;
+        socket.current.send(JSON.stringify(streamConfig));
+    }, [streamConfig, isConnected]);
 
     return <></>;
 };
