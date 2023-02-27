@@ -17,32 +17,27 @@ const ContSocketUpbit: React.FC = () => {
                 ]);
                 socket.current?.send(subscriptionMessage);
             };
-            socket.current.onerror = (error) => {
-                console.log('!!! Connection Error', error);
-            };
-            socket.current.onmessage = (what) => {
-                handleData(what.data);
+            // socket.current.onerror = (_error) => {};
+
+            socket.current.onmessage = (event) => {
+                if (event.data instanceof Blob) {
+                    const reader = new FileReader();
+                    reader.onload = () => {
+                        const json = JSON.parse(reader.result as string);
+                        console.log('@@@@', json);
+                        // TODO : processing
+                    };
+                    reader.readAsText(event.data);
+                } else {
+                    // TODO : processing
+                }
             };
         }
 
         return () => {
-            socket.current?.close();
+            if (socket.current) socket.current?.close();
         };
     }, []);
-
-    const handleData = (blob) => {
-        const reader = new FileReader();
-        reader.addEventListener('loadend', () => {
-            try {
-                const json = JSON.parse(reader.result as string);
-                console.log('!!!!', json);
-                // TODO: JSON 데이터 처리
-            } catch (error) {
-                console.error('Error parsing JSON', error);
-            }
-        });
-        reader.readAsText(blob);
-    };
 
     return <></>;
 };
