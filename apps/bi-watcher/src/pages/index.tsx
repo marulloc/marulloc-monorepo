@@ -4,6 +4,7 @@ import { Inter } from '@next/font/google';
 import styles from '@/styles/Home.module.css';
 import { MyDiv } from '@marulloc/marulloc-ui';
 import { useRef } from 'react';
+import ContSocketUpbit from '@/containers/ContSocketUpbit';
 const inter = Inter({ subsets: ['latin'] });
 
 export default function Home() {
@@ -16,6 +17,7 @@ export default function Home() {
                 <link rel="icon" href="/favicon.ico" />
             </Head>
             {/* <MyDiv propA="1" propB={33} /> */}
+            <ContSocketUpbit />
             <main className={styles.main}>
                 <div className={styles.description}>
                     <p>
