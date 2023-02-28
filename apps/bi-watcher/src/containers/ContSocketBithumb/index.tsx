@@ -31,7 +31,7 @@ const ContSocketBithumb: React.FC<TProps> = () => {
             };
 
             socket.current.onmessage = (event) => {
-                console.log('[BITHUMB]', JSON.parse(event.data));
+                console.log('[BITHUMB]', JSON.parse(event.data).content);
             };
         }
     }, []);

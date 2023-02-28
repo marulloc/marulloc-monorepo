@@ -6,6 +6,7 @@ import styles from '@/styles/Home.module.css';
 import ContSocketUpbit from '@/containers/ContSocketUpbit';
 import { useState } from 'react';
 import ContSocketBithumb from '@/containers/ContSocketBithumb';
+import ContSocketBinance from '@/containers/ContSocketBinance';
 const inter = Inter({ subsets: ['latin'] });
 
 export default function Home() {
@@ -45,8 +46,12 @@ export default function Home() {
                 </button>
             </div> */}
 
-            <div id="bithumb">
+            {/* <div id="bithumb">
                 <ContSocketBithumb />
+            </div> */}
+
+            <div id="binance">
+                <ContSocketBinance />
             </div>
 
             <main className={styles.main}>
