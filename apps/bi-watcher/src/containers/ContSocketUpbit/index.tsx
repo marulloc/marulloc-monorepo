@@ -8,6 +8,11 @@ type TProps = {
     //children
 };
 
+/**
+ * @see https://docs.upbit.com/docs/upbit-quotation-websocket
+ * @param param0
+ * @returns
+ */
 const ContSocketUpbit: React.FC<TProps> = ({ crypto, stream }) => {
     const socket = useRef<WebSocket | null>(null);
     const [isConnected, setIsConnected] = useState<boolean>(false);
@@ -18,7 +23,7 @@ const ContSocketUpbit: React.FC<TProps> = ({ crypto, stream }) => {
         if (!socket.current) {
             socket.current = new WebSocket(END_POINT);
             socket.current.onopen = () => {
-                console.log('!!! Connected !!!' + END_POINT);
+                console.log('Upbit Connected !!!' + END_POINT);
                 setIsConnected(true);
             };
             // socket.current.onerror = (_error) => {};
@@ -28,7 +33,7 @@ const ContSocketUpbit: React.FC<TProps> = ({ crypto, stream }) => {
                     const reader = new FileReader();
                     reader.onload = () => {
                         const json = JSON.parse(reader.result as string);
-                        console.log('@@@@', json);
+                        console.log('[UPBIT]', json);
                         // TODO : processing
                     };
                     reader.readAsText(event.data);

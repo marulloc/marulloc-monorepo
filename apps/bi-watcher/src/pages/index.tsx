@@ -5,6 +5,7 @@ import styles from '@/styles/Home.module.css';
 // import { MyDiv } from '@marulloc/marulloc-ui';
 import ContSocketUpbit from '@/containers/ContSocketUpbit';
 import { useState } from 'react';
+import ContSocketBithumb from '@/containers/ContSocketBithumb';
 const inter = Inter({ subsets: ['latin'] });
 
 export default function Home() {
@@ -22,7 +23,7 @@ export default function Home() {
                 <link rel="icon" href="/favicon.ico" />
             </Head>
             {/* <MyDiv propA="1" propB={33} /> */}
-            <div style={{ padding: 20, border: '1px solid red' }}>
+            {/* <div style={{ padding: 20, border: '1px solid red' }}>
                 <ContSocketUpbit crypto={testCrypto} stream={testStream} />
                 <button
                     style={{ height: 30, width: 100, margin: 5 }}
@@ -42,7 +43,12 @@ export default function Home() {
                 >
                     PUSH Trade
                 </button>
+            </div> */}
+
+            <div id="bithumb">
+                <ContSocketBithumb />
             </div>
+
             <main className={styles.main}>
                 <div className={styles.description}>
                     <p>
