@@ -11,7 +11,7 @@ const inter = Inter({ subsets: ['latin'] });
 
 export default function Home() {
     const [testStream, setTestStream] = useState<Array<'orderbook' | 'ticker' | 'trade'>>([
-        'orderbook',
+        'ticker',
     ]);
     const [testCrypto, setTestCrypto] = useState(['KRW-BTC']);
 
@@ -24,7 +24,7 @@ export default function Home() {
                 <link rel="icon" href="/favicon.ico" />
             </Head>
             {/* <MyDiv propA="1" propB={33} /> */}
-            {/* <div style={{ padding: 20, border: '1px solid red' }}>
+            <div style={{ padding: 20, border: '1px solid red' }}>
                 <ContSocketUpbit crypto={testCrypto} stream={testStream} />
                 <button
                     style={{ height: 30, width: 100, margin: 5 }}
@@ -44,15 +44,15 @@ export default function Home() {
                 >
                     PUSH Trade
                 </button>
-            </div> */}
+            </div>
 
             {/* <div id="bithumb">
                 <ContSocketBithumb />
-            </div> */}
+            </div>
 
             <div id="binance">
                 <ContSocketBinance />
-            </div>
+            </div> */}
 
             <main className={styles.main}>
                 <div className={styles.description}>

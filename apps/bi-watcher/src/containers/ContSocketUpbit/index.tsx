@@ -32,9 +32,32 @@ const ContSocketUpbit: React.FC<TProps> = ({ crypto, stream }) => {
                 if (event.data instanceof Blob) {
                     const reader = new FileReader();
                     reader.onload = () => {
-                        const json = JSON.parse(reader.result as string);
-                        console.log('[UPBIT]', json);
+                        const json: TUpbitTicker = JSON.parse(reader.result as string);
                         // TODO : processing
+
+                        // Ticker
+                        // console.log('[UPBIT]', json);
+                        // console.log('[UPBIT]', json.stream_type);
+                        console.log('[UPBIT]', json.trade_price);
+                        // console.log('[UPBIT]', json.timestamp);
+
+                        const date = new Date(json.timestamp);
+                        const year = date.getFullYear().toString().slice(-2); //년도 뒤에 두자리
+                        const month = ('0' + (date.getMonth() + 1)).slice(-2); //월 2자리 (01, 02 ... 12)
+                        const day = ('0' + date.getDate()).slice(-2); //일 2자리 (01, 02 ... 31)
+                        const hour = ('0' + date.getHours()).slice(-2); //시 2자리 (00, 01 ... 23)
+                        const minute = ('0' + date.getMinutes()).slice(-2); //분 2자리 (00, 01 ... 59)
+                        const second = ('0' + date.getSeconds()).slice(-2); //초 2자리 (00, 01 ... 59)
+
+                        console.log({
+                            year,
+                            month,
+                            day,
+                            hour,
+                            minute,
+                            second,
+                            price: json.trade_price,
+                        });
                     };
                     reader.readAsText(event.data);
                 } else {
@@ -60,10 +83,6 @@ const ContSocketUpbit: React.FC<TProps> = ({ crypto, stream }) => {
         if (stream.includes('orderbook')) sc.push({ type: 'orderbook', codes: [...crypto] });
         if (stream.includes('trade')) sc.push({ type: 'trade', codes: [...crypto] });
         return sc;
-        // { ticket: 'UNIQUE_TICKET' },
-        // { type: 'ticker', codes: ['KRW-BTC'] },
-        // { type: 'orderbook', codes: ['KRW-BTC'] },
-        // { type: 'trade', codes: ['KRW-BTC'] },
     }, [crypto, stream]);
 
     useEffect(() => {
