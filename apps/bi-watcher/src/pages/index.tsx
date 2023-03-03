@@ -24,7 +24,7 @@ export default function Home() {
                 <link rel="icon" href="/favicon.ico" />
             </Head>
             {/* <MyDiv propA="1" propB={33} /> */}
-            <div style={{ padding: 20, border: '1px solid red' }}>
+            {/* <div style={{ padding: 20, border: '1px solid red' }}>
                 <ContSocketUpbit crypto={testCrypto} stream={testStream} />
                 <button
                     style={{ height: 30, width: 100, margin: 5 }}
@@ -44,13 +44,13 @@ export default function Home() {
                 >
                     PUSH Trade
                 </button>
-            </div>
+            </div> */}
 
-            {/* <div id="bithumb">
+            <div id="bithumb">
                 <ContSocketBithumb />
             </div>
 
-            <div id="binance">
+            {/* <div id="binance">
                 <ContSocketBinance />
             </div> */}
 

@@ -24,14 +24,20 @@ const ContSocketBithumb: React.FC<TProps> = () => {
                 socket.current?.send(
                     JSON.stringify({
                         type: 'ticker',
-                        symbols: ['BTC_KRW', 'ETH_KRW'],
-                        tickTypes: ['30M', '1H', '12H', '24H', 'MID'],
+                        symbols: ['BTC_KRW'], //['BTC_KRW', 'ETH_KRW'],
+                        tickTypes: ['30M'], //['30M', '1H', '12H', '24H', 'MID'],
                     }),
                 );
             };
 
             socket.current.onmessage = (event) => {
-                console.log('[BITHUMB]', JSON.parse(event.data).content);
+                const json: TBithumbTicker = JSON.parse(event.data);
+                console.log(
+                    `[BITHUMB-${json.content?.symbol}]`,
+                    json.content?.prevClosePrice,
+                    json.content?.closePrice,
+                    json.content?.time,
+                );
             };
         }
     }, []);
