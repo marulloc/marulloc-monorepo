@@ -8,6 +8,20 @@ type TProps = {
     //children
 };
 
+const thirteenStampParser = (timestamp) => {
+    const eraseMilSecTimeStamp = Math.floor(timestamp / 1000) * 1000;
+
+    const date = new Date(eraseMilSecTimeStamp);
+    const year = date.getFullYear().toString().slice(-2); //년도 뒤에 두자리
+    const month = ('0' + (date.getMonth() + 1)).slice(-2); //월 2자리 (01, 02 ... 12)
+    const day = ('0' + date.getDate()).slice(-2); //일 2자리 (01, 02 ... 31)
+    const hour = ('0' + date.getHours()).slice(-2); //시 2자리 (00, 01 ... 23)
+    const minute = ('0' + date.getMinutes()).slice(-2); //분 2자리 (00, 01 ... 59)
+    const second = ('0' + date.getSeconds()).slice(-2); //초 2자리 (00, 01 ... 59)
+
+    return `${year}-${month}-${day} ${hour}:${minute}`;
+    return eraseMilSecTimeStamp;
+};
 /**
  * @see https://docs.upbit.com/docs/upbit-quotation-websocket
  * @param param0
@@ -16,6 +30,9 @@ type TProps = {
 const ContSocketUpbit: React.FC<TProps> = ({ crypto, stream }) => {
     const socket = useRef<WebSocket | null>(null);
     const [isConnected, setIsConnected] = useState<boolean>(false);
+
+    const candleRef = useRef({});
+    const [chartProps, setChartProps] = useState<Array<Array<number>>>([]);
 
     /** 2023.02.27 조병건
      *  Initialize  */
@@ -33,31 +50,65 @@ const ContSocketUpbit: React.FC<TProps> = ({ crypto, stream }) => {
                     const reader = new FileReader();
                     reader.onload = () => {
                         const json: TUpbitTicker = JSON.parse(reader.result as string);
-                        // TODO : processing
 
-                        // Ticker
-                        // console.log('[UPBIT]', json);
-                        // console.log('[UPBIT]', json.stream_type);
-                        console.log('[UPBIT]', json.trade_price);
-                        // console.log('[UPBIT]', json.timestamp);
+                        const now = thirteenStampParser(json.timestamp);
+                        const nowPrice = json.trade_price;
 
-                        const date = new Date(json.timestamp);
-                        const year = date.getFullYear().toString().slice(-2); //년도 뒤에 두자리
-                        const month = ('0' + (date.getMonth() + 1)).slice(-2); //월 2자리 (01, 02 ... 12)
-                        const day = ('0' + date.getDate()).slice(-2); //일 2자리 (01, 02 ... 31)
-                        const hour = ('0' + date.getHours()).slice(-2); //시 2자리 (00, 01 ... 23)
-                        const minute = ('0' + date.getMinutes()).slice(-2); //분 2자리 (00, 01 ... 59)
-                        const second = ('0' + date.getSeconds()).slice(-2); //초 2자리 (00, 01 ... 59)
+                        if (candleRef.current['time'] === now) {
+                            const prevHigh = candleRef.current['high'];
+                            const prevLow = candleRef.current['low'];
 
-                        console.log({
-                            year,
-                            month,
-                            day,
-                            hour,
-                            minute,
-                            second,
-                            price: json.trade_price,
-                        });
+                            candleRef.current = {
+                                ...candleRef.current,
+                                high: nowPrice > prevHigh ? nowPrice : prevHigh,
+                                low: nowPrice < prevLow ? nowPrice : prevLow,
+                                close: nowPrice,
+                            };
+
+                            setChartProps((prev) => {
+                                const copy = [...prev];
+                                copy.pop();
+                                return [
+                                    ...copy,
+                                    [
+                                        candleRef.current['time'],
+                                        candleRef.current['open'],
+                                        candleRef.current['high'],
+                                        candleRef.current['low'],
+                                        candleRef.current['close'],
+                                    ],
+                                ];
+                            });
+                        } else {
+                            if (!candleRef.current['time']) {
+                                candleRef.current = {
+                                    time: now,
+                                    open: nowPrice,
+                                    high: nowPrice,
+                                    low: nowPrice,
+                                    close: nowPrice,
+                                };
+                            } else {
+                                setChartProps((prev) => [
+                                    ...prev,
+                                    [
+                                        candleRef.current['time'],
+                                        candleRef.current['open'],
+                                        candleRef.current['high'],
+                                        candleRef.current['low'],
+                                        candleRef.current['close'],
+                                    ],
+                                ]);
+                                candleRef.current = {
+                                    time: now,
+                                    open: nowPrice,
+                                    high: nowPrice,
+                                    low: nowPrice,
+                                    close: nowPrice,
+                                };
+                            }
+                        }
+                        console.log('???', candleRef.current);
                     };
                     reader.readAsText(event.data);
                 } else {
@@ -90,7 +141,48 @@ const ContSocketUpbit: React.FC<TProps> = ({ crypto, stream }) => {
         socket.current.send(JSON.stringify(streamConfig));
     }, [streamConfig, isConnected]);
 
-    return <></>;
+    return (
+        <>
+            <TestCharts chartProps={chartProps} />
+        </>
+    );
 };
 
 export default ContSocketUpbit;
+
+import Highcharts from 'highcharts/highstock';
+import HighchartsExporting from 'highcharts/modules/exporting';
+import HighchartsReact from 'highcharts-react-official';
+import { timeStamp } from 'console';
+
+if (typeof Highcharts === 'object') {
+    HighchartsExporting(Highcharts);
+}
+/**
+ * TEST Ticker Chart
+ * @returns
+ */
+
+const TestCharts = ({ chartProps }) => {
+    // const o
+
+    const options = useMemo(
+        () => ({
+            title: {
+                text: 'My stock chart',
+            },
+            series: [
+                {
+                    type: 'candlestick',
+                    name: 'Upbit',
+                    data: [...chartProps],
+                },
+            ],
+        }),
+        [chartProps],
+    );
+
+    return (
+        <HighchartsReact highcharts={Highcharts} constructorType={'stockChart'} options={options} />
+    );
+};

@@ -4698,6 +4698,8 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["axios", "npm:1.3.4"],\
             ["eslint", "npm:8.33.0"],\
             ["eslint-config-next", "virtual:a2758f755f83f38b6399a2e779c722a30439a3d3bc0f5da5fcfbdc0834315a69acbc9f4a663caeb657ab12fe657e667e89e14c82390f3ed3c302cb6eb90ece27#npm:13.1.6"],\
+            ["highcharts", "npm:10.3.3"],\
+            ["highcharts-react-official", "virtual:a2758f755f83f38b6399a2e779c722a30439a3d3bc0f5da5fcfbdc0834315a69acbc9f4a663caeb657ab12fe657e667e89e14c82390f3ed3c302cb6eb90ece27#npm:3.2.0"],\
             ["next", "virtual:a2758f755f83f38b6399a2e779c722a30439a3d3bc0f5da5fcfbdc0834315a69acbc9f4a663caeb657ab12fe657e667e89e14c82390f3ed3c302cb6eb90ece27#npm:13.1.6"],\
             ["react", "npm:18.2.0"],\
             ["react-dom", "virtual:a2758f755f83f38b6399a2e779c722a30439a3d3bc0f5da5fcfbdc0834315a69acbc9f4a663caeb657ab12fe657e667e89e14c82390f3ed3c302cb6eb90ece27#npm:18.2.0"],\
@@ -14113,6 +14115,41 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
           "packageLocation": "./.yarn/cache/he-npm-1.2.0-3b73a2ff07-3d4d6babcc.zip/node_modules/he/",\
           "packageDependencies": [\
             ["he", "npm:1.2.0"]\
+          ],\
+          "linkType": "HARD"\
+        }]\
+      ]],\
+      ["highcharts", [\
+        ["npm:10.3.3", {\
+          "packageLocation": "./.yarn/cache/highcharts-npm-10.3.3-c7af5563d7-f406901094.zip/node_modules/highcharts/",\
+          "packageDependencies": [\
+            ["highcharts", "npm:10.3.3"]\
+          ],\
+          "linkType": "HARD"\
+        }]\
+      ]],\
+      ["highcharts-react-official", [\
+        ["npm:3.2.0", {\
+          "packageLocation": "./.yarn/cache/highcharts-react-official-npm-3.2.0-3eaa5d1749-c6716f7d5c.zip/node_modules/highcharts-react-official/",\
+          "packageDependencies": [\
+            ["highcharts-react-official", "npm:3.2.0"]\
+          ],\
+          "linkType": "SOFT"\
+        }],\
+        ["virtual:a2758f755f83f38b6399a2e779c722a30439a3d3bc0f5da5fcfbdc0834315a69acbc9f4a663caeb657ab12fe657e667e89e14c82390f3ed3c302cb6eb90ece27#npm:3.2.0", {\
+          "packageLocation": "./.yarn/__virtual__/highcharts-react-official-virtual-94d284fd01/0/cache/highcharts-react-official-npm-3.2.0-3eaa5d1749-c6716f7d5c.zip/node_modules/highcharts-react-official/",\
+          "packageDependencies": [\
+            ["highcharts-react-official", "virtual:a2758f755f83f38b6399a2e779c722a30439a3d3bc0f5da5fcfbdc0834315a69acbc9f4a663caeb657ab12fe657e667e89e14c82390f3ed3c302cb6eb90ece27#npm:3.2.0"],\
+            ["@types/highcharts", null],\
+            ["@types/react", "npm:18.0.27"],\
+            ["highcharts", "npm:10.3.3"],\
+            ["react", "npm:18.2.0"]\
+          ],\
+          "packagePeers": [\
+            "@types/highcharts",\
+            "@types/react",\
+            "highcharts",\
+            "react"\
           ],\
           "linkType": "HARD"\
         }]\

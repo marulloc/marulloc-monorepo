@@ -46,9 +46,13 @@ export default function Home() {
                 </button>
             </div> */}
 
-            <div id="bithumb">
-                <ContSocketBithumb />
+            <div id="upbit">
+                <ContSocketUpbit crypto={testCrypto} stream={testStream} />
             </div>
+
+            {/* <div id="bithumb">
+                <ContSocketBithumb />
+            </div> */}
 
             {/* <div id="binance">
                 <ContSocketBinance />
