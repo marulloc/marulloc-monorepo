@@ -1,4 +1,4 @@
-const thirteenTimestampParser = (timestamp) => {
+const upbitTimeParser = (timestamp: number) => {
     const eraseMilSecTimeStamp = Math.floor(timestamp / 1000) * 1000;
 
     const date = new Date(eraseMilSecTimeStamp);
@@ -10,7 +10,6 @@ const thirteenTimestampParser = (timestamp) => {
     // const second = ('0' + date.getSeconds()).slice(-2); //초 2자리 (00, 01 ... 59)
 
     return `${year}-${month}-${day} ${hour}:${minute}`;
-    return eraseMilSecTimeStamp;
 };
 
-export default thirteenTimestampParser;
+export default upbitTimeParser;

@@ -1,5 +1,5 @@
 import CandleStickChart from '@/components/CandleStickChart';
-import thirteenTimestampParser from '@/utils/parsers/thirteenTimestampParser';
+import upbitTimeParser from '@/utils/parsers/upbitTimeParser';
 import { useEffect, useMemo, useRef, useState } from 'react';
 
 const END_POINT = 'wss://api.upbit.com/websocket/v1';
@@ -38,7 +38,7 @@ const ContSocketUpbit: React.FC<TProps> = ({ crypto, stream }) => {
                     reader.onload = () => {
                         const json: TUpbitTicker = JSON.parse(reader.result as string);
 
-                        const now = thirteenTimestampParser(json.timestamp);
+                        const now = upbitTimeParser(json.timestamp);
                         const nowPrice = json.trade_price;
 
                         if (!now || !nowPrice) return;

@@ -1,4 +1,5 @@
 import CandleStickChart from '@/components/CandleStickChart';
+import bithumbTimeParser from '@/utils/parsers/bithumbTimeParser';
 import { useEffect, useRef, useState } from 'react';
 
 const END_POINT = 'wss://pubwss.bithumb.com/pub/ws';
@@ -37,7 +38,7 @@ const ContSocketBithumb: React.FC<TProps> = () => {
                 const json: TBithumbTicker = JSON.parse(event.data);
                 if (!json.content) return;
 
-                const now = parserTime(json.content?.date, json.content?.time);
+                const now = bithumbTimeParser(json.content?.date, json.content?.time);
                 const nowPrice = Number(json.content?.closePrice);
 
                 setCandles((prevCandles) => {
@@ -81,14 +82,3 @@ const ContSocketBithumb: React.FC<TProps> = () => {
 };
 
 export default ContSocketBithumb;
-
-const parserTime = (dateString, timeString) => {
-    if (!dateString || !timeString) return '';
-    const year = dateString.slice(0, 4);
-    const month = dateString.slice(4, 6);
-    const day = dateString.slice(6, 8);
-    const hour = timeString.slice(0, 2);
-    const minute = timeString.slice(2, 4);
-    // const second = timeString.slice(4,6)
-    return `${year}-${month}-${day} ${hour}:${minute}`;
-};
