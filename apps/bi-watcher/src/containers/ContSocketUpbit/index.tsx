@@ -98,7 +98,7 @@ const ContSocketUpbit: React.FC<TProps> = ({ crypto, stream }) => {
                                 };
                             }
                         }
-                        console.log('???', candleRef.current);
+                        // console.log('???', candleRef.current);
                     };
                     reader.readAsText(event.data);
                 } else {

@@ -11,7 +11,7 @@ if (typeof Highcharts === 'object') {
 type TProps = {
     series: Array<{
         name: string;
-        data: Array<[number, number, number, number, number]>;
+        data: Array<[number | string, number, number, number, number]>;
     }>;
 };
 
@@ -19,7 +19,7 @@ const CandleStickChart: React.FC<TProps> = ({ series }) => {
     const options = useMemo(
         () => ({
             title: { text: 'Marulloc CandleStick Test' },
-            series: [...series],
+            series: [...series.map((config) => ({ ...config, type: 'candlestick' }))],
         }),
         [series],
     );

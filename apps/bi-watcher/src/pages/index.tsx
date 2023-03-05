@@ -50,9 +50,9 @@ export default function Home() {
                 <ContSocketUpbit crypto={testCrypto} stream={testStream} />
             </div>
 
-            {/* <div id="bithumb">
+            <div id="bithumb">
                 <ContSocketBithumb />
-            </div> */}
+            </div>
 
             {/* <div id="binance">
                 <ContSocketBinance />
