@@ -1,3 +1,5 @@
+import CandleStickChart from '@/components/CandleStickChart';
+import thirteenTimestampParser from '@/utils/parsers/thirteenTimestampParser';
 import { useEffect, useMemo, useRef, useState } from 'react';
 
 const END_POINT = 'wss://api.upbit.com/websocket/v1';
@@ -8,20 +10,6 @@ type TProps = {
     //children
 };
 
-const thirteenStampParser = (timestamp) => {
-    const eraseMilSecTimeStamp = Math.floor(timestamp / 1000) * 1000;
-
-    const date = new Date(eraseMilSecTimeStamp);
-    const year = date.getFullYear().toString().slice(-2); //년도 뒤에 두자리
-    const month = ('0' + (date.getMonth() + 1)).slice(-2); //월 2자리 (01, 02 ... 12)
-    const day = ('0' + date.getDate()).slice(-2); //일 2자리 (01, 02 ... 31)
-    const hour = ('0' + date.getHours()).slice(-2); //시 2자리 (00, 01 ... 23)
-    const minute = ('0' + date.getMinutes()).slice(-2); //분 2자리 (00, 01 ... 59)
-    const second = ('0' + date.getSeconds()).slice(-2); //초 2자리 (00, 01 ... 59)
-
-    return `${year}-${month}-${day} ${hour}:${minute}`;
-    return eraseMilSecTimeStamp;
-};
 /**
  * @see https://docs.upbit.com/docs/upbit-quotation-websocket
  * @param param0
@@ -32,7 +20,9 @@ const ContSocketUpbit: React.FC<TProps> = ({ crypto, stream }) => {
     const [isConnected, setIsConnected] = useState<boolean>(false);
 
     const candleRef = useRef({});
-    const [chartProps, setChartProps] = useState<Array<Array<number>>>([]);
+    const [chartProps, setChartProps] = useState<Array<[number, number, number, number, number]>>(
+        [],
+    );
 
     /** 2023.02.27 조병건
      *  Initialize  */
@@ -51,7 +41,7 @@ const ContSocketUpbit: React.FC<TProps> = ({ crypto, stream }) => {
                     reader.onload = () => {
                         const json: TUpbitTicker = JSON.parse(reader.result as string);
 
-                        const now = thirteenStampParser(json.timestamp);
+                        const now = thirteenTimestampParser(json.timestamp);
                         const nowPrice = json.trade_price;
 
                         if (candleRef.current['time'] === now) {
@@ -143,46 +133,9 @@ const ContSocketUpbit: React.FC<TProps> = ({ crypto, stream }) => {
 
     return (
         <>
-            <TestCharts chartProps={chartProps} />
+            <CandleStickChart series={[{ name: 'upbit', data: chartProps }]} />
         </>
     );
 };
 
 export default ContSocketUpbit;
-
-import Highcharts from 'highcharts/highstock';
-import HighchartsExporting from 'highcharts/modules/exporting';
-import HighchartsReact from 'highcharts-react-official';
-import { timeStamp } from 'console';
-
-if (typeof Highcharts === 'object') {
-    HighchartsExporting(Highcharts);
-}
-/**
- * TEST Ticker Chart
- * @returns
- */
-
-const TestCharts = ({ chartProps }) => {
-    // const o
-
-    const options = useMemo(
-        () => ({
-            title: {
-                text: 'My stock chart',
-            },
-            series: [
-                {
-                    type: 'candlestick',
-                    name: 'Upbit',
-                    data: [...chartProps],
-                },
-            ],
-        }),
-        [chartProps],
-    );
-
-    return (
-        <HighchartsReact highcharts={Highcharts} constructorType={'stockChart'} options={options} />
-    );
-};
