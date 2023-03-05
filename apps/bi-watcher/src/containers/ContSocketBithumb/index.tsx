@@ -14,9 +14,8 @@ type TProps = {
  */
 const ContSocketBithumb: React.FC<TProps> = () => {
     const socket = useRef<WebSocket | null>(null);
-    const [chartProps, setChartProps] = useState<Array<[string, number, number, number, number]>>(
-        [],
-    );
+
+    const [candles, setCandles] = useState<Array<[string, number, number, number, number]>>([]);
 
     useEffect(() => {
         if (!socket.current) {
@@ -41,8 +40,8 @@ const ContSocketBithumb: React.FC<TProps> = () => {
                 const now = parserTime(json.content?.date, json.content?.time);
                 const nowPrice = Number(json.content?.closePrice);
 
-                setChartProps((prev) => {
-                    const copyPrev = [...prev];
+                setCandles((prevCandles) => {
+                    const copyPrev = [...prevCandles];
                     const lastCandle = copyPrev.pop();
                     if (!lastCandle) return [[now, nowPrice, nowPrice, nowPrice, nowPrice]];
 
@@ -69,11 +68,14 @@ const ContSocketBithumb: React.FC<TProps> = () => {
                 });
             };
         }
+        return () => {
+            if (socket.current) socket.current?.close();
+        };
     }, []);
 
     return (
         <>
-            <CandleStickChart series={[{ name: 'bithumb', data: chartProps }]} />
+            <CandleStickChart series={[{ name: 'bithumb', data: candles }]} />
         </>
     );
 };

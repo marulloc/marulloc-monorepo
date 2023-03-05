@@ -19,10 +19,7 @@ const ContSocketUpbit: React.FC<TProps> = ({ crypto, stream }) => {
     const socket = useRef<WebSocket | null>(null);
     const [isConnected, setIsConnected] = useState<boolean>(false);
 
-    const candleRef = useRef({});
-    const [chartProps, setChartProps] = useState<Array<[number, number, number, number, number]>>(
-        [],
-    );
+    const [candles, setCandles] = useState<Array<[string, number, number, number, number]>>([]);
 
     /** 2023.02.27 조병건
      *  Initialize  */
@@ -44,61 +41,35 @@ const ContSocketUpbit: React.FC<TProps> = ({ crypto, stream }) => {
                         const now = thirteenTimestampParser(json.timestamp);
                         const nowPrice = json.trade_price;
 
-                        if (candleRef.current['time'] === now) {
-                            const prevHigh = candleRef.current['high'];
-                            const prevLow = candleRef.current['low'];
+                        if (!now || !nowPrice) return;
 
-                            candleRef.current = {
-                                ...candleRef.current,
-                                high: nowPrice > prevHigh ? nowPrice : prevHigh,
-                                low: nowPrice < prevLow ? nowPrice : prevLow,
-                                close: nowPrice,
-                            };
+                        setCandles((prevCandles) => {
+                            const copyPrev = [...prevCandles];
+                            const lastCandle = copyPrev.pop();
+                            if (!lastCandle)
+                                return [[now as string, nowPrice, nowPrice, nowPrice, nowPrice]];
 
-                            setChartProps((prev) => {
-                                const copy = [...prev];
-                                copy.pop();
+                            const [lastTime, lastOpen, lastHigh, lastLow, lastClose] = lastCandle;
+
+                            if (lastTime === now) {
                                 return [
-                                    ...copy,
+                                    ...copyPrev,
                                     [
-                                        candleRef.current['time'],
-                                        candleRef.current['open'],
-                                        candleRef.current['high'],
-                                        candleRef.current['low'],
-                                        candleRef.current['close'],
+                                        lastTime as string,
+                                        lastOpen,
+                                        nowPrice > lastHigh ? nowPrice : lastHigh,
+                                        nowPrice < lastLow ? nowPrice : lastLow,
+                                        nowPrice,
                                     ],
                                 ];
-                            });
-                        } else {
-                            if (!candleRef.current['time']) {
-                                candleRef.current = {
-                                    time: now,
-                                    open: nowPrice,
-                                    high: nowPrice,
-                                    low: nowPrice,
-                                    close: nowPrice,
-                                };
                             } else {
-                                setChartProps((prev) => [
-                                    ...prev,
-                                    [
-                                        candleRef.current['time'],
-                                        candleRef.current['open'],
-                                        candleRef.current['high'],
-                                        candleRef.current['low'],
-                                        candleRef.current['close'],
-                                    ],
-                                ]);
-                                candleRef.current = {
-                                    time: now,
-                                    open: nowPrice,
-                                    high: nowPrice,
-                                    low: nowPrice,
-                                    close: nowPrice,
-                                };
+                                return [
+                                    ...copyPrev,
+                                    lastCandle,
+                                    [now as string, lastClose, nowPrice, nowPrice, nowPrice],
+                                ];
                             }
-                        }
-                        // console.log('???', candleRef.current);
+                        });
                     };
                     reader.readAsText(event.data);
                 } else {
@@ -133,7 +104,7 @@ const ContSocketUpbit: React.FC<TProps> = ({ crypto, stream }) => {
 
     return (
         <>
-            <CandleStickChart series={[{ name: 'upbit', data: chartProps }]} />
+            <CandleStickChart series={[{ name: 'upbit', data: candles }]} />
         </>
     );
 };
