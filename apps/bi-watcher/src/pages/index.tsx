@@ -54,9 +54,9 @@ export default function Home() {
                 <ContSocketBithumb />
             </div>
 
-            {/* <div id="binance">
+            <div id="binance">
                 <ContSocketBinance />
-            </div> */}
+            </div>
 
             <main className={styles.main}>
                 <div className={styles.description}>
