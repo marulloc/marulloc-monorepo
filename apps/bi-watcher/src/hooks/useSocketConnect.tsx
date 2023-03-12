@@ -11,6 +11,13 @@ type TProps = {
     onOpen?: () => void;
 };
 
+/**
+ * @see_bithumb https://apidocs.bithumb.com/reference/%EB%B9%97%EC%8D%B8-%EA%B1%B0%EB%9E%98%EC%86%8C-%EC%A0%95%EB%B3%B4-%EC%88%98%EC%8B%A0
+ * @see_binance https://binance-docs.github.io/apidocs/spot/en/#live-subscribing-unsubscribing-to-streams
+ * @see_upbit https://docs.upbit.com/docs/upbit-quotation-websocket
+ * @param exchange
+ * @returns
+ */
 const useSocketConnect = (exchange: TProps['cryptoExchange']): WebSocket | null => {
     const socket = useRef<WebSocket | null>(null);
     const [isConnected, setIsConnected] = useState<boolean>(false);
