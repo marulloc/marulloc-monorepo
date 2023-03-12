@@ -7,7 +7,7 @@ const upbitTimeParser = (timestamp: number) => {
     const day = ('0' + date.getDate()).slice(-2); //일 2자리 (01, 02 ... 31)
     const hour = ('0' + date.getHours()).slice(-2); //시 2자리 (00, 01 ... 23)
     const minute = ('0' + date.getMinutes()).slice(-2); //분 2자리 (00, 01 ... 59)
-    // const second = ('0' + date.getSeconds()).slice(-2); //초 2자리 (00, 01 ... 59)
+    const second = ('0' + date.getSeconds()).slice(-2); //초 2자리 (00, 01 ... 59)
 
     return `${year}-${month}-${day} ${hour}:${minute}`;
 };

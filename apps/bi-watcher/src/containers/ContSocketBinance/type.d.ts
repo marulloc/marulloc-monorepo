@@ -1,6 +1,8 @@
 /**
  * 2023.03.03 기준
+ * 1초동안의 High Low Open Price가 다 넘어옴
  */
+
 type TBinanceTicker = {
     e: '24hrTicker'; // Event type
     E: number; // 123456789; // Event time
@@ -26,3 +28,5 @@ type TBinanceTicker = {
     L: number; // 18150; // Last trade Id
     n: number; // 18151; // Total number of trades
 };
+
+1678621237974;
