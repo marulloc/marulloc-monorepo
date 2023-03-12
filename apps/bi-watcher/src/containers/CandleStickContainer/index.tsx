@@ -1,3 +1,4 @@
+import CandleStickChart from '@/components/CandleStickChart';
 import useSocketConnect from '@/hooks/useSocketConnect';
 import { unixTimestampParser } from '@/utils/parsers/\bunixTimestampParser';
 import bithumbTimeParser from '@/utils/parsers/bithumbTimeParser';
@@ -179,7 +180,17 @@ const CandleStickContainer: React.FC = () => {
         );
     }, [binance]);
 
-    return <>asd</>;
+    return (
+        <>
+            <CandleStickChart
+                series={[
+                    { name: 'upbit', data: upbitCandles },
+                    { name: 'binance', data: binanceCandles },
+                    { name: 'bithumb', data: bithumbCandles },
+                ]}
+            />
+        </>
+    );
 };
 
 export default CandleStickContainer;
