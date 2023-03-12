@@ -1,5 +1,5 @@
 import CandleStickChart from '@/components/CandleStickChart';
-import upbitTimeParser from '@/utils/parsers/upbitTimeParser';
+import { unixTimestampParser } from '@/utils/parsers/\bunixTimestampParser';
 import { useEffect, useRef, useState } from 'react';
 
 type TProps = {
@@ -13,7 +13,7 @@ type TProps = {
  */
 const ContSocketBinance: React.FC<TProps> = () => {
     const socket = useRef<WebSocket | null>(null);
-    const [candles, setCandles] = useState<Array<[string, number, number, number, number]>>([]);
+    const [candles, setCandles] = useState<Array<[number, number, number, number, number]>>([]);
 
     const END_POINT1 = 'wss://stream.binance.com:9443/ws';
 
@@ -39,7 +39,7 @@ const ContSocketBinance: React.FC<TProps> = () => {
                 const data: TBinanceTicker = JSON.parse(event.data);
                 if (!data) return;
 
-                const now = upbitTimeParser(data.E);
+                const now = unixTimestampParser(data.E);
                 const nowPrice = Number(data.c);
 
                 if (isNaN(nowPrice)) return;

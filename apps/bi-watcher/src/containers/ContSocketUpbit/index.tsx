@@ -1,5 +1,5 @@
 import CandleStickChart from '@/components/CandleStickChart';
-import upbitTimeParser from '@/utils/parsers/upbitTimeParser';
+import { unixTimestampParser } from '@/utils/parsers/\bunixTimestampParser';
 import { useEffect, useMemo, useRef, useState } from 'react';
 
 const END_POINT = 'wss://api.upbit.com/websocket/v1';
@@ -19,7 +19,7 @@ const ContSocketUpbit: React.FC<TProps> = ({ crypto, stream }) => {
     const socket = useRef<WebSocket | null>(null);
     const [isConnected, setIsConnected] = useState<boolean>(false);
 
-    const [candles, setCandles] = useState<Array<[string, number, number, number, number]>>([]);
+    const [candles, setCandles] = useState<Array<[number, number, number, number, number]>>([]);
 
     /** 2023.02.27 조병건
      *  Initialize  */
@@ -38,7 +38,7 @@ const ContSocketUpbit: React.FC<TProps> = ({ crypto, stream }) => {
                     reader.onload = () => {
                         const json: TUpbitTicker = JSON.parse(reader.result as string);
 
-                        const now = upbitTimeParser(json.timestamp);
+                        const now = unixTimestampParser(json.timestamp);
                         const nowPrice = json.trade_price;
 
                         if (!now || !nowPrice) return;
@@ -46,8 +46,7 @@ const ContSocketUpbit: React.FC<TProps> = ({ crypto, stream }) => {
                         setCandles((prevCandles) => {
                             const copyPrev = [...prevCandles];
                             const lastCandle = copyPrev.pop();
-                            if (!lastCandle)
-                                return [[now as string, nowPrice, nowPrice, nowPrice, nowPrice]];
+                            if (!lastCandle) return [[now, nowPrice, nowPrice, nowPrice, nowPrice]];
 
                             const [lastTime, lastOpen, lastHigh, lastLow, lastClose] = lastCandle;
 
@@ -55,7 +54,7 @@ const ContSocketUpbit: React.FC<TProps> = ({ crypto, stream }) => {
                                 return [
                                     ...copyPrev,
                                     [
-                                        lastTime as string,
+                                        lastTime,
                                         lastOpen,
                                         nowPrice > lastHigh ? nowPrice : lastHigh,
                                         nowPrice < lastLow ? nowPrice : lastLow,
@@ -66,7 +65,7 @@ const ContSocketUpbit: React.FC<TProps> = ({ crypto, stream }) => {
                                 return [
                                     ...copyPrev,
                                     lastCandle,
-                                    [now as string, lastClose, nowPrice, nowPrice, nowPrice],
+                                    [now, lastClose, nowPrice, nowPrice, nowPrice],
                                 ];
                             }
                         });

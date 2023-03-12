@@ -16,7 +16,7 @@ type TProps = {
 const ContSocketBithumb: React.FC<TProps> = () => {
     const socket = useRef<WebSocket | null>(null);
 
-    const [candles, setCandles] = useState<Array<[string, number, number, number, number]>>([]);
+    const [candles, setCandles] = useState<Array<[number, number, number, number, number]>>([]);
 
     useEffect(() => {
         if (!socket.current) {
