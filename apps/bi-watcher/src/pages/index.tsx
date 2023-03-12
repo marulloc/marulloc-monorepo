@@ -7,13 +7,13 @@ import ContSocketUpbit from '@/containers/ContSocketUpbit';
 import { useState } from 'react';
 import ContSocketBithumb from '@/containers/ContSocketBithumb';
 import ContSocketBinance from '@/containers/ContSocketBinance';
+import useSocketConnect from '@/hooks/useSocketConnect';
 const inter = Inter({ subsets: ['latin'] });
 
 export default function Home() {
-    const [testStream, setTestStream] = useState<Array<'orderbook' | 'ticker' | 'trade'>>([
-        'ticker',
-    ]);
-    const [testCrypto, setTestCrypto] = useState(['KRW-BTC']);
+    const upbit = useSocketConnect('UPBIT');
+    const binance = useSocketConnect('BINANCE');
+    const bithumb = useSocketConnect('BITHUMB');
 
     return (
         <>
@@ -23,40 +23,18 @@ export default function Home() {
                 <meta name="viewport" content="width=device-width, initial-scale=1" />
                 <link rel="icon" href="/favicon.ico" />
             </Head>
-            {/* <MyDiv propA="1" propB={33} /> */}
-            {/* <div style={{ padding: 20, border: '1px solid red' }}>
+
+            {/* <div id="upbit">
                 <ContSocketUpbit crypto={testCrypto} stream={testStream} />
-                <button
-                    style={{ height: 30, width: 100, margin: 5 }}
-                    onClick={() => setTestStream((prev) => [...prev, 'ticker'])}
-                >
-                    PUSH ticker
-                </button>
-                <button
-                    style={{ height: 30, width: 100, margin: 5 }}
-                    onClick={() => setTestStream((prev) => [...prev, 'orderbook'])}
-                >
-                    PUSH orderbook
-                </button>
-                <button
-                    style={{ height: 30, width: 100, margin: 5 }}
-                    onClick={() => setTestStream((prev) => [...prev, 'trade'])}
-                >
-                    PUSH Trade
-                </button>
             </div> */}
 
-            <div id="upbit">
-                <ContSocketUpbit crypto={testCrypto} stream={testStream} />
-            </div>
-
-            <div id="bithumb">
+            {/* <div id="bithumb">
                 <ContSocketBithumb />
-            </div>
+            </div> */}
 
-            <div id="binance">
+            {/* <div id="binance">
                 <ContSocketBinance />
-            </div>
+            </div> */}
 
             <main className={styles.main}>
                 <div className={styles.description}>
