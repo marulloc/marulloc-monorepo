@@ -1,4 +1,4 @@
-import { useEffect, useRef } from 'react';
+import { useEffect, useRef, useState } from 'react';
 
 const END_POINTS = {
     BITHUMB: 'wss://pubwss.bithumb.com/pub/ws',
@@ -12,22 +12,25 @@ type TProps = {
 };
 
 const useSocketConnect = (exchange: TProps['cryptoExchange']): WebSocket | null => {
-    const socket = useRef<WebSocket | null>(null);
+    const [socket, setSocket] = useState<WebSocket | null>(null);
 
-    // Init
     useEffect(() => {
-        if (socket.current) socket.current.close();
-        else {
-            socket.current = new WebSocket(END_POINTS[exchange]);
-            socket.current.onopen = () => console.log(`[${exchange}] successfully connected !!`);
-        }
+        setSocket((prevSocket) => {
+            prevSocket?.close();
 
-        return () => {
-            if (socket.current) socket.current?.close();
-        };
-    }, [exchange]);
+            const newSocket = new WebSocket(END_POINTS[exchange]);
+            newSocket.onopen = () => console.log(`[${exchange}] successfully connected !!`);
+            return newSocket;
+        });
 
-    return socket.current;
+        return () =>
+            setSocket((prevSocket) => {
+                prevSocket?.close();
+                return null;
+            });
+    }, [setSocket, exchange]);
+
+    return socket;
 };
 
 export default useSocketConnect;

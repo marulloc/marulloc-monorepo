@@ -8,12 +8,13 @@ import { useState } from 'react';
 import ContSocketBithumb from '@/containers/ContSocketBithumb';
 import ContSocketBinance from '@/containers/ContSocketBinance';
 import useSocketConnect from '@/hooks/useSocketConnect';
+import CandleStickContainer from '@/containers/CandleStickContainer';
 const inter = Inter({ subsets: ['latin'] });
 
 export default function Home() {
-    const upbit = useSocketConnect('UPBIT');
-    const binance = useSocketConnect('BINANCE');
-    const bithumb = useSocketConnect('BITHUMB');
+    // const upbit = useSocketConnect('UPBIT');
+    // const binance = useSocketConnect('BINANCE');
+    // const bithumb = useSocketConnect('BITHUMB');
 
     return (
         <>
@@ -35,6 +36,7 @@ export default function Home() {
             {/* <div id="binance">
                 <ContSocketBinance />
             </div> */}
+            <CandleStickContainer />
 
             <main className={styles.main}>
                 <div className={styles.description}>
