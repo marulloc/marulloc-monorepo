@@ -12,25 +12,23 @@ type TProps = {
 };
 
 const useSocketConnect = (exchange: TProps['cryptoExchange']): WebSocket | null => {
-    const [socket, setSocket] = useState<WebSocket | null>(null);
+    const socket = useRef<WebSocket | null>(null);
+    const [isConnected, setIsConnected] = useState<boolean>(false);
 
     useEffect(() => {
-        setSocket((prevSocket) => {
-            prevSocket?.close();
+        socket.current?.close();
 
-            const newSocket = new WebSocket(END_POINTS[exchange]);
-            newSocket.onopen = () => console.log(`[${exchange}] successfully connected !!`);
-            return newSocket;
-        });
+        const newSocket = new WebSocket(END_POINTS[exchange]);
+        newSocket.onopen = () => {
+            console.log(`[${exchange}] successfully connected !!`);
+            setIsConnected(true);
+        };
+        socket.current = newSocket;
 
-        return () =>
-            setSocket((prevSocket) => {
-                prevSocket?.close();
-                return null;
-            });
-    }, [setSocket, exchange]);
+        return () => socket.current?.close();
+    }, [exchange]);
 
-    return socket;
+    return isConnected ? socket.current : null;
 };
 
 export default useSocketConnect;
